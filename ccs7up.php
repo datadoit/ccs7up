@@ -176,53 +176,53 @@ function fixPHP($PHPFile)
       $parent_class_name = $tokens[3];
     }
 
-		//Move the inter-file pointer to the start of our matching string found.
+    //Move the inter-file pointer to the start of our matching string found.
     $new_offset = $matches[$res][1];
-		$offset1 = $new_offset + 1;
-		if (strlen($str_result) == 0) {
-			$str_result = substr($str, 0, $new_offset);
-		}
+    $offset1 = $new_offset + 1;
+    if (strlen($str_result) == 0) {
+	$str_result = substr($str, 0, $new_offset);
+    }
 
-		//Get the location of the next class found, if any, so that only the 
+    //Get the location of the next class found, if any, so that only the 
     //current class found is processed.
-		if (preg_match($pattern, $str, $matches1, PREG_OFFSET_CAPTURE, $offset1)) {
-			//Found another class.
-			$res1 = select_min_match($matches1);
-			$next_offset = $matches1[$res1][1];
-			$string_to_process = substr($str, $new_offset, $next_offset - $new_offset);
-		}
-		else {
-			//There isn't another class definition, so use the rest of the input string.
-			$string_to_process = substr($str, $new_offset);
-			$next_offset = $str_len;
-		}
+    if (preg_match($pattern, $str, $matches1, PREG_OFFSET_CAPTURE, $offset1)) {
+	//Found another class.
+	$res1 = select_min_match($matches1);
+	$next_offset = $matches1[$res1][1];
+	$string_to_process = substr($str, $new_offset, $next_offset - $new_offset);
+    }
+    else {
+	//There isn't another class definition, so use the rest of the input string.
+	$string_to_process = substr($str, $new_offset);
+	$next_offset = $str_len;
+    }
 
-		//Look for functions within the class using the same name as the class.
+    //Look for functions within the class using the same name as the class.
     //Ref: https://www.php.net/manual/en/migration70.deprecated.php#:~:text=PHP%204%20style%20constructors%20(methods,construct()%20method%20are%20unaffected
-		if (preg_match('/function[ ]+' . $class_name . '[(]/i', $string_to_process)) {
-			$string_to_process = preg_replace('/function[ ]+' . $class_name . '[(]/i', "function __construct(", $string_to_process);
-			if ($string_to_process  == NULL) {
-				echo "Fatal error attempting to change class " . $class_name . " function constructor! \n"; return;
-			}
+    if (preg_match('/function[ ]+' . $class_name . '[(]/i', $string_to_process)) {
+	$string_to_process = preg_replace('/function[ ]+' . $class_name . '[(]/i', "function __construct(", $string_to_process);
+	if ($string_to_process  == NULL) {
+	    echo "Fatal error attempting to change class " . $class_name . " function constructor! \n"; return;
+	}
       else {
         echo "Fixed class " . $class_name . " function constructor. \n";
         //$change_made = true;
         $changesCounter++;
       }
-		}
+    }
 
-		//Look for class parents using the same name as the class, and change to a constructor. Same as above.
-		if ($parent_class_name and preg_match('/parent::' . $parent_class_name . '[(]/i', $string_to_process)) {
-			$string_to_process = preg_replace('/parent::' . $parent_class_name . '[(]/i', "parent::__construct(", $string_to_process);
-			if ($string_to_process  == NULL) {
-				echo "Fatal error attempting to change parent class " . $parent_class_name . " function constructor! \n"; return;
-			}
+    //Look for class parents using the same name as the class, and change to a constructor. Same as above.
+    if ($parent_class_name and preg_match('/parent::' . $parent_class_name . '[(]/i', $string_to_process)) {
+	$string_to_process = preg_replace('/parent::' . $parent_class_name . '[(]/i', "parent::__construct(", $string_to_process);
+	if ($string_to_process  == NULL) {
+	    echo "Fatal error attempting to change parent class " . $parent_class_name . " function constructor! \n"; return;
+	}
       else {
         echo "Fixed parent class " . $parent_class_name . " function constructor. \n";
         //$change_made = true;
         $changesCounter++;
       }
-		}
+    }
 
     //Move our pointer to the next occurence (or end of file).
     $offset = $next_offset;
