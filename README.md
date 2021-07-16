@@ -7,7 +7,7 @@ The last release of CodeCharge Studio v5.1.1.18992 in March of 2016 will generat
 * Interactive usage with optional recursive folder scanning.
 * Changes PHP 4 style constructors or methods that have the same name as the class they are defined in.
 * Fixes CCSEvents bindings and illegal string offset errors.
-* Alters the deprecated each() function with foreach().
+* Replaces the deprecated each() function with foreach().
 * Fixes casting string objects to an integer.
 * Adjusts deprecated curly brace syntax for accessing array elements and string offsets.
 * Replace any occurences of deprecated get_magic_quotes_gpc() function with a false constant.
