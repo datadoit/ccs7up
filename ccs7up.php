@@ -150,6 +150,18 @@ function fixPHP($PHPFile)
 
   while (preg_match( $pattern, $str, $matches, PREG_OFFSET_CAPTURE, $offset) && $offset < $str_len ) {
 
+    //Since PHP Release 8.2 dynamic properties are deprecated and the logfile is filled with warnings. 
+    //This patch adds the AllowDynamicProperties attribute to classes. See https://www.php.net/manual/de/class.allowdynamicproperties.php
+    //@mweinbergh
+    preg_match( '/(#\[AllowDynamicProperties\])/', $str, $m, PREG_OFFSET_CAPTURE, (int)$matches[0][1]-strlen('#[AllowDynamicProperties]')-2) ;
+    if (isset($m[0])) {
+       $AllowDynamicProperties = '';
+    }
+    else {
+       $AllowDynamicProperties = "#[AllowDynamicProperties]\r\n";
+       $changesCounter++;
+    }
+	   
     //Classes found in the file! Set the flag.
     $classFound = true;
     
