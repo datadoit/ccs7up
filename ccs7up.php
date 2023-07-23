@@ -237,7 +237,7 @@ function fixPHP($PHPFile)
 
     //Move our pointer to the next occurence (or end of file).
     $offset = $next_offset;
-    $str_result .= $string_to_process;
+    $str_result .= "$AllowDynamicProperties$string_to_process";
 
   } //end of while 'class' found
 
