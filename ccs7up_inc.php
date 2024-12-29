@@ -17,6 +17,7 @@
  *
  * The ccs7up.log file will be created and updated in the web root directory.
  *
+ * 2024-12-29, DataDoIT: Added MySQL adapters to list of CodeCharge generated files.
  * 2023-09-21, DataDoIT: Created.
  *
  */
@@ -136,6 +137,8 @@ foreach ($files as $dirKey => $dirVal) {
 							"//Client @0-",
 							"//DB Adapter Class @0-",
 							"//DB Array Class @0-",
+							"//DB MySQL Class @0-",
+							"//DB MySQLi Class @0-",
 							"//Navigator Class @0-",
 							"//Service Class @100-",
 							"//Sorter Class @0-",
