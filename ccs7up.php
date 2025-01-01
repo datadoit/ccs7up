@@ -180,7 +180,8 @@ function fixPHP($PHPFile)
 			"//Navigator Class @0-",
 			"//Service Class @100-",
 			"//Sorter Class @0-",
-			"//Template class @0-"
+			"//Template class @0-",
+	  		"//Variables @1-"
 		);
   foreach ($CCSNeedles as $needle) {
     if (strpos($str, $needle) !== false) {
