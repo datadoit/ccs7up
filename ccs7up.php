@@ -1,14 +1,15 @@
 <?php
 
 /*
-Updates PHP files created by CodeCharge Studio v5.1.1.18992 to work with PHP v7.1+.
+Updates PHP files created by CodeCharge Studio v5 to work with PHP v7.1+.
 
-Place this file into your web root folder, then from the CLI run: php /var/www/html/ccs7up.php
+Place this file into your web root folder, such as /var/www/html/, then from the CLI run: php /var/www/html/ccs7up.php
 
 */
 
 // Exit if script is not called from a command line.
 if (!isset($_SERVER['SERVER_SOFTWARE']) and (php_sapi_name() == 'cli' or (is_numeric($_SERVER['argc']) and $_SERVER['argc'] > 0))) {
+  echo chr(27).chr(91).'H'.chr(27).chr(91).'J'; //clear the screen
   for ($i = 0; $i < 2; $i++) echo "\n"; //pretty spacing
 }
 else {
@@ -137,7 +138,7 @@ foreach ($files as $dirKey => $dirVal) {
 
 
 // Display the results of the scan.
-echo "All done. " . number_format($PHPFileCount) . " PHP files scanned. " . number_format($TotalChanges) . " changes made in " . number_format($PHPFileWithChanges) . " files. Goodbye!\n\n";
+echo "All done. " . number_format($PHPFileCount) . " PHP files scanned. " . number_format($TotalChanges) . " changes made in " . number_format($PHPFileWithChanges) . " files. Enjoy!\n\n";
 exit;
 
 
