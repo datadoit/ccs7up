@@ -129,21 +129,22 @@ foreach ($files as $dirKey => $dirVal) {
 		// Array of phrases to look for that denotes a CCS generated file.
 		$CCSGeneratedFile = false;
 		$CCSNeedles = array(
-							"//Include Files @0-",
-							"//Include Common Files @1-",
-							"//BindEvents Method @1-",
-							"//CalendarNavigator Class @0-",
-							"//File Description @0-",
-							"//Client @0-",
-							"//DB Adapter Class @0-",
-							"//DB Array Class @0-",
-							"//DB MySQL Class @0-",
-							"//DB MySQLi Class @0-",
-							"//Navigator Class @0-",
-							"//Service Class @100-",
-							"//Sorter Class @0-",
-							"//Template class @0-"
-							);
+					"//Include Files @0-",
+					"//Include Common Files @1-",
+					"//BindEvents Method @1-",
+					"//CalendarNavigator Class @0-",
+					"//File Description @0-",
+					"//Client @0-",
+					"//DB Adapter Class @0-",
+					"//DB Array Class @0-",
+					"//DB MySQL Class @0-",
+					"//DB MySQLi Class @0-",
+					"//Navigator Class @0-",
+					"//Service Class @100-",
+					"//Sorter Class @0-",
+					"//Template class @0-",
+					"//Variables @1-"
+				);
 		foreach ($CCSNeedles as $needle) {
 			if (strpos($PHPFileContents, $needle) !== false) {
 				$CCSGeneratedFile = true;
